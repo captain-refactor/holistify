@@ -1,27 +1,36 @@
 import {IClientConstructor, IControllable} from "./facade";
-// import {HttpClient} from "@martin_hotell/axios-http";
-import {Inject} from "injection-js";
-
+import Axios, {AxiosInstance} from 'axios';
 
 export class ClientProxyHandler<T extends object = any> implements ProxyHandler<T> {
-    get(target: T, p: PropertyKey, receiver: any): any {
-        console.log(p);
-        return 'success';
+    axios: AxiosInstance = Axios.create({method: 'POST', responseType: 'json'});
+
+    constructor(private className: string) {
+
+    }
+
+    get(target: T, p: string, receiver: any): any {
+        return async (...args) => {
+            return await this.axios.post(`/${this.className}/${p}`, args)
+        };
     }
 }
 
 export class JsonRpcClientFactory {
     createClient<T extends object = any>(constructor: IControllable<T>): IClientConstructor<T> {
-        return class {
-            static get parameters() {
-                return [new Inject(HttpClient)];
-            }
+        let className = constructor.name;
+        let clientName = className + 'Client';
 
-            constructor(private http: HttpClient) {
-                let instance = new Proxy<T>(this as any, new ClientProxyHandler<T>())
+        let clientConstructor = class {
+            // static get parameters() {
+            //     return [new Inject(HttpClient)];
+            // }
+            constructor() {
+                let instance = new Proxy<T>(this as any, new ClientProxyHandler<T>(className));
                 return instance as any;
             }
 
         } as any;
+        Object.defineProperty(clientConstructor, 'name', {value: clientName});
+        return clientConstructor;
     }
 }

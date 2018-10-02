@@ -1,5 +1,3 @@
-import {HttpClient} from "@martin_hotell/axios-http";
-
 export interface IControllable<T = any> {
     new(...args): T;
 }
@@ -8,6 +6,10 @@ export interface IControllable<T = any> {
 //     [P in K]: T[K];
 // }
 
+export interface IClientOptions {
+    // path?: string;
+}
+
 export type IClientConstructor<T> = {
-    new(http: HttpClient): T
+    new(options?: IClientOptions): T
 };
