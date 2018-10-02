@@ -21,6 +21,7 @@
     "@abraham/reflection": "^0.4.2",
     "@martin_hotell/axios-http": "^0.3.1",
     "@types/mocha": "^5.2.5",
+    "axios": "^0.18.0",
     "injection-js": "^2.2.1",
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
