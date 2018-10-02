@@ -4,6 +4,10 @@ export interface IControllable<T = any> {
     new(...args): T;
 }
 
-export interface IClientConstructor<T> {
+// type Extend<T, K extends keyof T = keyof T> = {
+//     [P in K]: T[K];
+// }
+
+export type IClientConstructor<T> = {
     new(http: HttpClient): T
-}
+};
