@@ -1,6 +1,4 @@
-export interface IControllable<T = any> {
-    new(...args): T;
-}
+import {IControllable} from "./facade";
 
 export class JsonRpcControllerFactory {
     static create(constructor: IControllable) {
