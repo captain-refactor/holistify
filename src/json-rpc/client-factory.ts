@@ -10,7 +10,8 @@ export class ClientProxyHandler<T extends object = any> implements ProxyHandler<
 
     get(target: T, p: string, receiver: any): any {
         return async (...args) => {
-            return await this.axios.post(`/${this.className}/${p}`, args)
+            let response = await this.axios.post(`/${this.className}/${p}`, args);
+            return response.data;
         };
     }
 }
