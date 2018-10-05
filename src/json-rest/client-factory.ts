@@ -16,7 +16,7 @@ export class ClientProxyHandler<T extends object = any> implements ProxyHandler<
     }
 }
 
-export class JsonRpcClientFactory {
+export class ClientFactory {
     createClient<T extends object = any>(constructor: IControllable<T>): IClientConstructor<T> {
         let className = constructor.name;
         let clientName = className + 'Client';

@@ -1,4 +1,4 @@
-import {JsonRpcControllerFactory} from "./controller-factory";
+import {ControllerFactory} from "./controller-factory";
 import * as express from 'express';
 import axios from 'axios';
 import {ok} from "assert";
@@ -11,7 +11,7 @@ describe('controler factory', function () {
             }
         }
 
-        let TestServiceController = JsonRpcControllerFactory.create(TestService);
+        let TestServiceController = ControllerFactory.create(TestService);
         let instance = new TestService();
         let app = express();
         new TestServiceController(instance, app);

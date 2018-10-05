@@ -1,9 +1,9 @@
-import {JsonRpcClientFactory} from "./client-factory";
+import {ClientFactory} from "./client-factory";
 import {ok} from "assert";
 import * as nock from 'nock';
 
 describe('Client factory', function () {
-    let factory = new JsonRpcClientFactory();
+    let factory = new ClientFactory();
 
     // it('should create proxy', function () {
     //     class A {

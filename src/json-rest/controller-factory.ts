@@ -9,7 +9,7 @@ export interface ControllerContructor<T> {
     new(instance: T, express: Express);
 }
 
-export class JsonRpcControllerFactory {
+export class ControllerFactory {
     static create<T>(constructor: IControllable<T>, options?: IOptions): ControllerContructor<T> {
         let className = constructor.name;
         let controllerName = className + 'Controller';
